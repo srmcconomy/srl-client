@@ -1,6 +1,8 @@
 import app from 'app'
 import BrowserWindow from 'browser-window'
 
+var mainWindow = null;
+
 app.on('window-all-closed', () => {
   if (process.platform != 'darwin') {
     app.quit();
