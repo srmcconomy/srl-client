@@ -3,6 +3,15 @@
   flex-direction: column;
 }
 
+.flex-horizontal {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-spacer {
+  flex: 1;
+}
+
 .channels {
   width: 240px;
   background-color: grey;
