@@ -4,6 +4,8 @@ import Dispatcher from '../dispatcher'
 const channels = {};
 
 function addMessage(message) {
+  if (!channels.hasOwnProperty(message.channel))
+    channels[message.channel] = { name: message.channel, time: message.date, messages: [] }
   channels[message.channel].messages.push(message);
 }
 

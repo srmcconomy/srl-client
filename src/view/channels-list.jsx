@@ -20,11 +20,11 @@ export default class ChannelsList extends React.Component {
   }
 
   componentDidMount() {
-    MessagesStore.on('change', this.onChange);
+    MessagesStore.on('change', this.onChange.bind(this));
   }
 
   componentWillUnmount() {
-    MessagesStore.removeListener('change', this.onChange);
+    MessagesStore.removeListener('change', this.onChange.bind(this));
   }
 
   onChange() {

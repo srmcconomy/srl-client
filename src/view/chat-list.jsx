@@ -1,4 +1,5 @@
 import MessagesStore from '../stores/messages-store'
+import ChatListItem from './chat-list-item'
 import React from 'react'
 
 export default class ChatList extends React.Component {
@@ -10,7 +11,7 @@ export default class ChatList extends React.Component {
   }
 
   render() {
-    let chatListItems = this.state.messages.map(message => <MessageListItem message={message}/>);
+    let chatListItems = this.state.messages.map(message => <ChatListItem message={message}/>);
     return (
       <div className="chat-list">
         {chatListItems}
@@ -19,11 +20,11 @@ export default class ChatList extends React.Component {
   }
 
   componentDidMount() {
-    MessagesStore.on('change', this.onChange);
+    MessagesStore.on('change', this.onChange.bind(this));
   }
 
   componentWillUnmount() {
-    MessagesStore.removeListener('change', this.onChange);
+    MessagesStore.removeListener('change', this.onChange.bind(this));
   }
 
   onChange() {
