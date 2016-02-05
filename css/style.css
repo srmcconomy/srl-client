@@ -1,3 +1,75 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
+
+.display4 {
+  font-weight: 200;
+  font-size: 112px;
+  opacity: .54;
+}
+
+.display3 {
+  font-weight: 300;
+  font-size: 56px;
+  opacity: .54;
+}
+
+.display2 {
+  font-weight: 300;
+  font-size: 45px;
+  opacity: .54;
+}
+
+.display1 {
+  font-weight: 300;
+  font-size: 34px;
+  opacity: .54;
+}
+
+.headline {
+  font-weight: 300;
+  font-size: 24px;
+  opacity: .87;
+}
+
+.title {
+  font-weight: 400;
+  font-size: 20px;
+  opacity: .87;
+}
+
+.subheading {
+  font-weight: 300;
+  font-size: 15px;
+  opacity: .87;
+}
+
+.body2 {
+  font-weight: 400;
+  font-size: 14px;
+  opacity: .87;
+}
+
+.body1 {
+  font-weight: 300;
+  font-size: 14px;
+  opacity: .87;
+}
+
+.caption {
+  font-weight: 400;
+  font-size: 12px;
+  opacity: .54;
+}
+
+.button {
+  font-weight: 200;
+  font-size: 14px;
+  opacity: .87;
+}
+
+body {
+  font-family: Roboto, Helvetica, Arial;
+}
+
 .flex-vertical {
   display: flex;
   flex-direction: column;
@@ -23,4 +95,35 @@
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+.scroller {
+  overflow-x: hidden;
+}
+
+.scroller-wrap {
+  position: relative;
+  display: flex;
+}
+
+.message-time {
+  width:50px;
+  text-align: right;
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.message-sender {
+  margin-right: 4px;
+}
+
+.chat-list-item {
+  text-indent: -90px;
+  padding-left: 90px;
+  padding-bottom: 4px;
+  line-height: 22px;
+}
+
+.scroller::-webkit-scrollbar-thumb {
+  background: red;
 }

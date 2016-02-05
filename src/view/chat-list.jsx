@@ -13,7 +13,7 @@ export default class ChatList extends React.Component {
   render() {
     let chatListItems = this.state.messages.map(message => <ChatListItem message={message}/>);
     return (
-      <div className="chat-list">
+      <div className="chat-list scroller flex-spacer">
         {chatListItems}
       </div>
     )

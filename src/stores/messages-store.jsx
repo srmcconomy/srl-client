@@ -6,7 +6,7 @@ const channels = {};
 function addMessage(message) {
   if (!channels.hasOwnProperty(message.channel))
     channels[message.channel] = { name: message.channel, time: message.date, messages: [] }
-  channels[message.channel].messages.push(message);
+  channels["#speedrunslive"].messages.push(message);
 }
 
 var currentChannel = '#speedrunslive';
@@ -24,6 +24,7 @@ const MessagesStore = Object.assign({}, EventEmitter.prototype, {
     return channels[channel];
   },
   getLatestTime: function(channel) {
+    if (channels[channel].messages.length == 0) return 0;
     return channels[channel].messages[channels[channel].messages.length - 1].time;
   },
   getCurrentChannelMessages: function() {
@@ -35,7 +36,7 @@ const MessagesStore = Object.assign({}, EventEmitter.prototype, {
   getChannels: function() {
     let chans = [];
     for (let name in channels) {
-      chans.push({ name: name, time: getLatestTime(name) })
+      chans.push({ name: name, time: this.getLatestTime(name) })
     }
     return chans;
   }

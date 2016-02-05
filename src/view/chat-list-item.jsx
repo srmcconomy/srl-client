@@ -6,9 +6,9 @@ export default class ChatListItem extends React.Component {
     var message = this.props.message;
     return (
       <div className="chat-list-item">
-        <div className="message-sender">{message.sender}</div>
-        <div className="message-time">{dateformat(new Date(message.time), "h:MM TT")}</div>
-        <div className="message-content">{message.content}</div>
+          <span className="message-time caption">{(new Date(message.time)).format("h:MM TT")}</span>
+          <span className="message-sender body2">{message.sender}</span>
+          <span className="message-content body1">{message.content}</span>
       </div>
     );
   }
