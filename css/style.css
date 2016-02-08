@@ -1,55 +1,55 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
 
 .display4 {
-  font-weight: 200;
+  font-weight: 300;
   font-size: 112px;
   opacity: .54;
 }
 
 .display3 {
-  font-weight: 300;
+  font-weight: 400;
   font-size: 56px;
   opacity: .54;
 }
 
 .display2 {
-  font-weight: 300;
+  font-weight: 400;
   font-size: 45px;
   opacity: .54;
 }
 
 .display1 {
-  font-weight: 300;
+  font-weight: 400;
   font-size: 34px;
   opacity: .54;
 }
 
 .headline {
-  font-weight: 300;
+  font-weight: 400;
   font-size: 24px;
   opacity: .87;
 }
 
 .title {
-  font-weight: 400;
+  font-weight: 500;
   font-size: 20px;
   opacity: .87;
 }
 
 .subheading {
-  font-weight: 300;
+  font-weight: 400;
   font-size: 15px;
   opacity: .87;
 }
 
 .body2 {
-  font-weight: 400;
+  font-weight: 500;
   font-size: 14px;
   opacity: .87;
 }
 
 .body1 {
-  font-weight: 300;
+  font-weight: 400;
   font-size: 14px;
   opacity: .87;
 }
@@ -86,7 +86,11 @@ body {
 
 .channels {
   width: 240px;
-  background-color: grey;
+  background-color: #212121;
+}
+
+.chat {
+  background-color: #303030;
 }
 
 .app {
@@ -95,6 +99,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
+  color: white;
 }
 
 .scroller {
@@ -122,8 +127,27 @@ body {
   padding-left: 90px;
   padding-bottom: 4px;
   line-height: 22px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 0 10px 0 20px;
 }
 
-.scroller::-webkit-scrollbar-thumb {
-  background: red;
+.channels-list-item {
+  display: flex;
+  padding: 10px;
+  cursor: pointer;
+  flex-direction: row;
+}
+
+.channel-time {
+  margin-left: auto;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: grey;
+  border-radius: 8px;
+  border: 2px solid white;
 }
