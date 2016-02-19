@@ -1,126 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
-
-.display4 {
-  font-weight: 300;
-  font-size: 112px;
-  opacity: .54;
-}
-
-.display3 {
-  font-weight: 400;
-  font-size: 56px;
-  opacity: .54;
-}
-
-.display2 {
-  font-weight: 400;
-  font-size: 45px;
-  opacity: .54;
-}
-
-.display1 {
-  font-weight: 400;
-  font-size: 34px;
-  opacity: .54;
-}
-
-.headline {
-  font-weight: 400;
-  font-size: 24px;
-  opacity: .87;
-}
-
-.title {
-  font-weight: 500;
-  font-size: 20px;
-  opacity: .87;
-}
-
-.subheading {
-  font-weight: 400;
-  font-size: 15px;
-  opacity: .87;
-}
-
-.body2 {
-  font-weight: 500;
-  font-size: 14px;
-  opacity: .87;
-}
-
-.body1 {
-  font-weight: 400;
-  font-size: 14px;
-  opacity: .87;
-}
-
-.caption {
-  font-weight: 400;
-  font-size: 12px;
-  opacity: .54;
-}
-
-.button {
-  font-weight: 200;
-  font-size: 14px;
-  opacity: .87;
-}
-
-body {
-  font-family: Roboto, Helvetica, Arial;
-}
-
-.flex-vertical {
-  display: flex;
-  flex-direction: column;
-}
-
-.flex-horizontal {
-  display: flex;
-  flex-direction: row;
-}
-
-.flex-spacer {
-  flex: 1;
-}
-
-.channels {
-  width: 240px;
-  background-color: #212121;
-}
-
 .chat {
-  background-color: #303030;
-}
-
-.app {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  color: white;
-}
-
-.scroller {
-  overflow-x: hidden;
-}
-
-.scroller-wrap {
-  position: relative;
-  display: flex;
-}
-
-.message-time {
-  width:50px;
-  text-align: right;
-  margin-right: 10px;
-  display: inline-block;
-}
-
-.message-sender {
-  margin-right: 4px;
-}
+  background-color: #303030; }
 
 .chat-list-item {
   text-indent: -90px;
@@ -128,26 +8,152 @@ body {
   padding-bottom: 4px;
   line-height: 22px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  margin: 0 10px 0 20px;
-}
+  margin: 0 10px 0 20px; }
+  .chat-list-item .message-time {
+    width: 50px;
+    text-align: right;
+    margin-right: 10px;
+    display: inline-block; }
+  .chat-list-item .message-sender {
+    margin-right: 4px; }
+  .chat-list-item .red-fore {
+    color: #F44336; }
+  .chat-list-item .pink-fore {
+    color: #E91E63; }
+  .chat-list-item .purple-fore {
+    color: #9C27B0; }
+  .chat-list-item .blue-fore {
+    color: #2196F3; }
+  .chat-list-item .light-blue-fore {
+    color: #03A9F4; }
+  .chat-list-item .cyan-fore {
+    color: #00BCD4; }
+  .chat-list-item .teal-fore {
+    color: #009688; }
+  .chat-list-item .green-fore {
+    color: #4CAF50; }
+  .chat-list-item .light-green-fore {
+    color: #8BC34A; }
+  .chat-list-item .yellow-fore {
+    color: #FFEB3B; }
+  .chat-list-item .orange-fore {
+    color: #FF9800; }
+  .chat-list-item .brown-fore {
+    color: #795548; }
+  .chat-list-item .grey-fore {
+    color: #9E9E9E; }
+  .chat-list-item .light-grey-fore {
+    color: #BDBDBD; }
+  .chat-list-item .white-fore {
+    color: #FFFFFF; }
+  .chat-list-item .black-fore {
+    color: #000000; }
+
+body {
+  font-family: Roboto, Helvetica, Arial; }
+
+.display4 {
+  font-weight: 300;
+  font-size: 112px;
+  opacity: .54; }
+
+.display3 {
+  font-weight: 400;
+  font-size: 56px;
+  opacity: .54; }
+
+.display2 {
+  font-weight: 400;
+  font-size: 45px;
+  opacity: .54; }
+
+.display1 {
+  font-weight: 400;
+  font-size: 34px;
+  opacity: .54; }
+
+.headline {
+  font-weight: 400;
+  font-size: 24px;
+  opacity: .87; }
+
+.title {
+  font-weight: 500;
+  font-size: 20px;
+  opacity: .87; }
+
+.subheading {
+  font-weight: 400;
+  font-size: 15px;
+  opacity: .87; }
+
+.body2 {
+  font-weight: 500;
+  font-size: 14px;
+  opacity: .87; }
+
+.body1 {
+  font-weight: 400;
+  font-size: 14px;
+  opacity: .87; }
+
+.caption {
+  font-weight: 400;
+  font-size: 12px;
+  opacity: .54; }
+
+.button {
+  font-weight: 200;
+  font-size: 14px;
+  opacity: .87; }
+
+a {
+  color: inherit;
+  text-decoration: inherit; }
+
+.flex-vertical {
+  display: flex;
+  flex-direction: column; }
+
+.flex-horizontal {
+  display: flex;
+  flex-direction: row; }
+
+.flex-spacer {
+  flex: 1; }
+
+.channels {
+  width: 240px;
+  background-color: #212121; }
+
+.app {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: white; }
+
+.scroller {
+  overflow-x: hidden; }
+
+.scroller-wrap {
+  position: relative;
+  display: flex; }
 
 .channels-list-item {
   display: flex;
   padding: 10px;
   cursor: pointer;
-  flex-direction: row;
-}
+  flex-direction: row; }
 
 .channel-time {
-  margin-left: auto;
-}
+  margin-left: auto; }
 
 ::-webkit-scrollbar {
-  width: 12px;
-}
+  width: 12px; }
 
 ::-webkit-scrollbar-thumb {
   background: grey;
   border-radius: 8px;
-  border: 2px solid white;
-}
+  border: 2px solid white; }

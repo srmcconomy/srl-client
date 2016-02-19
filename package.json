@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron dist/index.js"
   },
   "author": "",
   "license": "ISC",
@@ -23,6 +23,7 @@
     "babel-preset-react": "^6.3.13",
     "gulp": "^3.9.0",
     "gulp-babel": "^6.1.1",
-    "gulp-plumber": "^1.0.1"
+    "gulp-plumber": "^1.0.1",
+    "gulp-sass": "^2.2.0"
   }
 }

@@ -1,0 +1,75 @@
+@import 'irc-colours';
+
+.chat {
+  background-color: #303030;
+}
+
+.chat-list-item {
+  text-indent: -90px;
+  padding-left: 90px;
+  padding-bottom: 4px;
+  line-height: 22px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 0 10px 0 20px;
+
+  .message-time {
+    width:50px;
+    text-align: right;
+    margin-right: 10px;
+    display: inline-block;
+  }
+
+  .message-sender {
+    margin-right: 4px;
+  }
+
+  .red-fore {
+    color: $red;
+  }
+  .pink-fore {
+    color: $pink;
+  }
+  .purple-fore {
+    color: $purple;
+  }
+  .blue-fore {
+    color: $blue;
+  }
+  .light-blue-fore {
+    color: $light-blue;
+  }
+  .cyan-fore {
+    color: $cyan;
+  }
+  .teal-fore {
+    color: $teal;
+  }
+  .green-fore {
+    color: $green;
+  }
+  .light-green-fore {
+    color: $light-green;
+  }
+  .yellow-fore {
+    color: $yellow;
+  }
+  .orange-fore {
+    color: $orange;
+  }
+  .brown-fore {
+    color: $brown;
+  }
+  .grey-fore {
+    color: $grey;
+  }
+  .light-grey-fore {
+    color: $light-grey;
+  }
+  .white-fore {
+    color: $white;
+  }
+  .black-fore {
+    color: $black;
+  }
+
+}

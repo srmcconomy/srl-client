@@ -1,8 +1,9 @@
 var gulp = require('gulp');
 var babel = require('gulp-babel');
 var plumber = require('gulp-plumber');
+var sass = require('gulp-sass');
 
-gulp.task('build', () => {
+gulp.task('babel', () => {
   return gulp.src('src/**/*.js?(x)')
     .pipe(plumber())
     .pipe(babel({
@@ -11,8 +12,18 @@ gulp.task('build', () => {
     .pipe(gulp.dest('dist'));
 });
 
+gulp.task('sass', () => {
+  return gulp.src('sass/**/*.scss')
+    .pipe(plumber())
+    .pipe(sass())
+    .pipe(gulp.dest('css'));
+})
+
+gulp.task('build', ['babel', 'sass']);
+
 gulp.task('watch', () => {
-  return gulp.watch('src/**/*.js?(x)', ['build']);
+  gulp.watch('src/**/*.js?(x)', ['babel']);
+  gulp.watch('sass/**/*.scss', ['sass']);
 });
 
 gulp.task('default', ['build', 'watch']);

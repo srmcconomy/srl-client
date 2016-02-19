@@ -1,6 +1,6 @@
 import irc from 'irc'
 import dispatcher from './dispatcher'
-debugger;
+
 const client = new irc.Client('irc.speedrunslive.com', 'prettybigjoe', { channels: ['#speedrunslive'] });
 
 client.on('message', (nick, to, text, message) => {

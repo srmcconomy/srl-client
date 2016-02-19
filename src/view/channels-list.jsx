@@ -1,6 +1,6 @@
 import React from 'react'
-import MessagesStore from '../stores/messages-store'
 import ChannelsListItem from './channels-list-item'
+var MessagesStore = require('electron').remote.app.messagesStore;
 
 export default class ChannelsList extends React.Component {
   constructor(props) {
@@ -20,10 +20,12 @@ export default class ChannelsList extends React.Component {
   }
 
   componentDidMount() {
+    window.addEventListener('beforeunload', this.componentWillUnmount);
     MessagesStore.on('change', this.onChange.bind(this));
   }
 
   componentWillUnmount() {
+    window.removeEventListener('beforeunload', this.componentWillUnmount);
     MessagesStore.removeListener('change', this.onChange.bind(this));
   }
 
