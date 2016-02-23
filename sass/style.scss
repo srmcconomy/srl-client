@@ -5,6 +5,10 @@
 a {
   color: inherit;
   text-decoration: inherit;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    text-shadow: 0 3px 6px rgba(0,0,0,0.42), 0 3px 6px rgba(0,0,0,0.56);
+  }
 }
 
 .flex-vertical {
@@ -56,11 +60,11 @@ a {
 }
 
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 16px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: grey;
+  background: black;
   border-radius: 8px;
-  border: 2px solid white;
+  border: 4px solid #303030;
 }

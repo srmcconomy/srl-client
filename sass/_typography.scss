@@ -7,65 +7,68 @@ body {
 .display4 {
   font-weight: 300;
   font-size: 112px;
-  opacity: .54;
+  color: rgba(255,255,255,.54);
 }
 
 .display3 {
   font-weight: 400;
   font-size: 56px;
-  opacity: .54;
+  color: rgba(255,255,255,.54);
 }
 
 .display2 {
   font-weight: 400;
   font-size: 45px;
-  opacity: .54;
+  color: rgba(255,255,255,.54);
 }
 
 .display1 {
   font-weight: 400;
   font-size: 34px;
-  opacity: .54;
+  color: rgba(255,255,255,.54);
 }
 
 .headline {
   font-weight: 400;
   font-size: 24px;
-  opacity: .87;
+  color: rgba(255,255,255,.87);
 }
 
 .title {
   font-weight: 500;
   font-size: 20px;
-  opacity: .87;
+  color: rgba(255,255,255,.87);
 }
 
 .subheading {
   font-weight: 400;
   font-size: 15px;
-  opacity: .87;
+  color: rgba(255,255,255,.87);
 }
 
 .body2 {
   font-weight: 500;
   font-size: 14px;
-  opacity: .87;
+  color: rgba(255,255,255,.87);
 }
 
 .body1 {
-  font-weight: 400;
+  font-weight: 300;
   font-size: 14px;
-  opacity: .87;
+  color: rgba(255,255,255,.87);
+  a {
+    font-weight: 500;
+  }
 }
 
 .caption {
   font-weight: 400;
   font-size: 12px;
-  opacity: .54;
+  color: rgba(255,255,255,.54);
 }
 
 .button {
   font-weight: 200;
   font-size: 14px;
-  opacity: .87;
+  color: rgba(255,255,255,.87);
 }
