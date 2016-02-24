@@ -1,5 +1,5 @@
 import React from 'react'
-import dispatcher from '../dispatcher'
+var dispatcher = require('electron').remote.app.dispatcher;
 
 export default class ChannelLink extends React.Component {
   render() {

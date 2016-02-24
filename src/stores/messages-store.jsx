@@ -9,6 +9,10 @@ function addMessage(message) {
   channels[message.channel].messages.push(message);
 }
 
+function addNotice(message) {
+  channels[currentChannel].messages.push(message);
+}
+
 var currentChannel = '#speedrunslive';
 channels[currentChannel] = {
   name: currentChannel,
@@ -45,11 +49,17 @@ const MessagesStore = Object.assign({}, EventEmitter.prototype, {
 MessagesStore.dispatchToken = Dispatcher.register(function(action) {
   switch(action.type) {
    case 'change-channel':
+   console.log(action.channel)
     currentChannel = action.channel;
+    if (!channels.hasOwnProperty(currentChannel)) channels[currentChannel] = { name: currentChannel, time: 0, messages: [] }
     MessagesStore.emit('change');
     break;
-   case 'recieve-message':
+   case 'recieve-pm':
     addMessage(action.message);
+    MessagesStore.emit('change');
+    break;
+   case 'recieve-notice':
+    addNotice(action.message);
     MessagesStore.emit('change');
     break;
   }

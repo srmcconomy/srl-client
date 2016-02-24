@@ -6,12 +6,14 @@ export default class ChannelsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      channels: MessagesStore.getChannels()
+      channels: MessagesStore.getChannels(),
+      currentChannel: MessagesStore.getCurrentChannel().name
     }
   }
 
   render() {
-    let channelsList = this.state.channels.map(channel => <ChannelsListItem channel={channel}/>)
+    let i = 0;
+    let channelsList = this.state.channels.map(channel => <ChannelsListItem key={i++} channel={channel} selected={channel.name === this.state.currentChannel}/>)
     return (
       <div className="channels-list">
         {channelsList}
@@ -30,6 +32,9 @@ export default class ChannelsList extends React.Component {
   }
 
   onChange() {
-    this.setState({ channels: MessagesStore.getChannels() });
+    this.setState({
+      channels: MessagesStore.getChannels(),
+      currentChannel: MessagesStore.getCurrentChannel().name
+    });
   }
 }

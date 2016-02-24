@@ -6,7 +6,7 @@ const client = new irc.Client('irc.speedrunslive.com', 'prettybigjoe', { channel
 client.on('message', (nick, to, text, message) => {
   console.log(message);
   dispatcher.dispatch({
-    type: 'recieve-message',
+    type: 'recieve-pm',
     message: { sender: nick, channel: to, content: text, time: Date.now() }
   })
 });
@@ -14,13 +14,22 @@ client.on('message', (nick, to, text, message) => {
 client.on('notice', (nick, to, text, message) => {
   console.log(message);
   dispatcher.dispatch({
-    type: 'recieve-message',
-    message: { sender: nick, channel: to, content: text, time: Date.now() }
+    type: 'recieve-notice',
+    message: { sender: nick, content: text, time: Date.now() }
   })
 });
 
 client.on('raw', message => console.log(message));
 
 client.on('error', err => console.log(err));
+
+client.dispatchToken = dispatcher.register(function(action) {
+  switch(action.type) {
+   case 'change-channel':
+    if (!client.chans.hasOwnProperty(action.channel)) {
+      client.join(action.channel);
+    }
+  }
+})
 
 export default client;
