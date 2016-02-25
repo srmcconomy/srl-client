@@ -7,14 +7,15 @@ export default class ChatList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      messages: MessagesStore.getCurrentChannelMessages()
+      messages: MessagesStore.getMessagesForChannel(this.props.channel),
+      visible: MessagesStore.getCurrentChannel().name === this.props.channel
     }
   }
 
   render() {
     let chatListItems = this.state.messages.map((message, index) => <ChatListItem message={message} key={index}/>);
     return (
-      <div className="chat-list scroller flex-spacer">
+      <div className={"chat-list scroller flex-spacer" + (!this.state.visible ? " hidden" : "")}>
         {chatListItems}
       </div>
     )
@@ -33,16 +34,17 @@ export default class ChatList extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener('beforeunload', this.componentWillUnmount);
     MessagesStore.on('change', this.onChange.bind(this));
   }
 
   componentWillUnmount() {
-    window.removeEventListener('beforeunload', this.componentWillUnmount);
     MessagesStore.removeListener('change', this.onChange.bind(this));
   }
 
   onChange() {
-    this.setState({ messages: MessagesStore.getCurrentChannelMessages() });
+    this.setState({
+      messages: MessagesStore.getMessagesForChannel(this.props.channel),
+      visible: MessagesStore.getCurrentChannel().name === this.props.channel
+    });
   }
 }

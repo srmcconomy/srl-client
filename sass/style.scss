@@ -11,6 +11,10 @@ a {
   }
 }
 
+.hidden {
+  height: 0;
+}
+
 .flex-vertical {
   display: flex;
   flex-direction: column;

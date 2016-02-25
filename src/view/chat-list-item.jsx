@@ -90,7 +90,6 @@ function parseMessage(message) {
 export default class ChatListItem extends React.Component {
   render() {
     var message = this.props.message;
-    console.log(message.content)
     return (
       <div className="chat-list-item">
           <span className="message-time caption">{(new Date(message.time)).format("h:MM TT")}</span>

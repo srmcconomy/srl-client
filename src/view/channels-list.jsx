@@ -6,14 +6,13 @@ export default class ChannelsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      channels: MessagesStore.getChannels(),
-      currentChannel: MessagesStore.getCurrentChannel().name
+      channels: MessagesStore.getChannels()
     }
   }
 
   render() {
     let i = 0;
-    let channelsList = this.state.channels.map(channel => <ChannelsListItem key={i++} channel={channel} selected={channel.name === this.state.currentChannel}/>)
+    let channelsList = this.state.channels.map(channel => <ChannelsListItem key={i++} channel={channel} />)
     return (
       <div className="channels-list">
         {channelsList}
@@ -22,12 +21,10 @@ export default class ChannelsList extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener('beforeunload', this.componentWillUnmount);
     MessagesStore.on('change', this.onChange.bind(this));
   }
 
   componentWillUnmount() {
-    window.removeEventListener('beforeunload', this.componentWillUnmount);
     MessagesStore.removeListener('change', this.onChange.bind(this));
   }
 
