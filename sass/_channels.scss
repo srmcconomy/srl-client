@@ -1,0 +1,13 @@
+
+.channels {
+  width: 240px;
+  background-color: #212121;
+  z-index: 10;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.42), 0 3px 6px rgba(0,0,0,0.56);
+}
+
+.channels-list-item {
+  &.selected {
+    background-color: #303030;
+  }
+}

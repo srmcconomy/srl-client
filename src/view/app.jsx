@@ -1,6 +1,7 @@
 import React from 'react';
 import ChannelsPane from './channels-pane';
 import ChatPane from './chat-pane';
+import ErrorModal from './error-modal';
 
 export default class App extends React.Component {
   render() {
@@ -12,6 +13,7 @@ export default class App extends React.Component {
             <ChatPane />
           </section>
         </div>
+        <ErrorModal/>
       </div>
     );
   }

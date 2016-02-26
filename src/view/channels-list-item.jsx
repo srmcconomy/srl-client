@@ -6,7 +6,7 @@ var MessagesStore = require('electron').remote.app.messagesStore;
 export default class ChannelsListItem extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { selected: MessagesStore.getCurrentChannel().name === props.channel }
+    this.state = { selected: MessagesStore.getCurrentChannel().name === props.channel.name }
   }
 
   render() {
@@ -36,7 +36,7 @@ export default class ChannelsListItem extends React.Component {
 
   onChange() {
     this.setState({
-      selected: MessagesStore.getCurrentChannel().name === this.props.channel
+      selected: MessagesStore.getCurrentChannel().name === this.props.channel.name
     });
   }
 }

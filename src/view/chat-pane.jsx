@@ -13,7 +13,9 @@ export default class ChatPane extends React.Component {
     let chatLists = this.state.channels.map(channel => <ChatList channel={channel.name}/>)
     return (
       <div className="chat flex-spacer flex-vertical">
-        {chatLists}
+        <div className="chat-mount flex-spacer flex-vertical">
+          {chatLists}
+        </div>
         <ChatInput/>
       </div>
     );

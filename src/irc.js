@@ -17,15 +17,30 @@ client.on('notice', (nick, to, text, message) => {
   })
 });
 
-//client.on('raw', message => console.log(message));
+client.on('raw', message => {
+  console.log(message);
+  if (message.command === '477') {
+    console.log('!!!ERRROR')
+    dispatcher.dispatch({
+      type: 'error',
+      message: message.args[2]
+    })
+  }
+});
 
 client.on('error', err => console.log(err));
 
 client.dispatchToken = dispatcher.register(function(action) {
   switch(action.type) {
    case 'change-channel':
+   console.log(Object.keys(client.chans))
     if (!client.chans.hasOwnProperty(action.channel)) {
-      client.join(action.channel);
+      client.join(action.channel, function() {
+        dispatcher.dipatch({
+          type: 'channel-joined',
+          channel: action.channel
+        })
+      });
     }
   }
 })

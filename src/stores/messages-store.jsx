@@ -48,10 +48,16 @@ const MessagesStore = Object.assign({}, EventEmitter.prototype, {
 
 MessagesStore.dispatchToken = Dispatcher.register(function(action) {
   switch(action.type) {
-   case 'change-channel':
+   case 'channel-joined':
     currentChannel = action.channel;
-    if (!channels.hasOwnProperty(currentChannel)) channels[currentChannel] = { name: currentChannel, time: 0, messages: [] }
+    if (!channels.hasOwnProperty(currentChannel))
+      channels[currentChannel] = { name: currentChannel, time: 0, messages: [] }
     MessagesStore.emit('change');
+   case 'change-channel':
+    if (channels.hasOwnProperty(action.channel)) {
+      currentChannel = action.channel;
+      MessagesStore.emit('change');
+    }
     break;
    case 'recieve-pm':
     addMessage(action.message);
