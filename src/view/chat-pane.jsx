@@ -16,7 +16,6 @@ export default class ChatPane extends React.Component {
         <div className="chat-mount flex-spacer flex-vertical">
           {chatLists}
         </div>
-        <ChatInput/>
       </div>
     );
   }

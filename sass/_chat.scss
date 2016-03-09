@@ -26,6 +26,16 @@
 
 .chat-input {
   z-index: 10;
+
+  textarea {
+    resize: none;
+    outline: none;
+    background: inherit;
+    color: inherit;
+    font: inherit;
+    border: none;
+    width: 100%;
+  }
 }
 
 .chat-list-item {

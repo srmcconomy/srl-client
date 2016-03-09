@@ -5,7 +5,7 @@ const channels = {};
 
 function addMessage(message) {
   if (!channels.hasOwnProperty(message.channel))
-    channels[message.channel] = { name: message.channel, time: message.date, messages: [] }
+    channels[message.channel] = { name: message.channel, time: message.date, messages: [], currentText: '' }
   channels[message.channel].messages.push(message);
 }
 
@@ -17,7 +17,8 @@ var currentChannel = '#speedrunslive';
 channels[currentChannel] = {
   name: currentChannel,
   time: Date.now(),
-  messages: []
+  messages: [],
+  currentText: ''
 }
 
 const MessagesStore = Object.assign({}, EventEmitter.prototype, {

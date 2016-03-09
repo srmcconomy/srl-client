@@ -1,4 +1,5 @@
 import ChatListItem from './chat-list-item'
+import ChatInput from './chat-input'
 import React from 'react'
 import ReactDOM from 'react-dom'
 var MessagesStore = require('electron').remote.app.messagesStore;
@@ -15,8 +16,11 @@ export default class ChatList extends React.Component {
   render() {
     let chatListItems = this.state.messages.map((message, index) => <ChatListItem message={message} key={index}/>);
     return (
-      <div className={"chat-list scroller flex-spacer" + (!this.state.visible ? " hidden" : "")}>
-        {chatListItems}
+      <div>
+        <div className={"chat-list scroller flex-spacer" + (!this.state.visible ? " hidden" : "")}>
+          {chatListItems}
+        </div>
+        <ChatInput/>
       </div>
     )
   }

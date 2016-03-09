@@ -5,7 +5,8 @@ var ErrorStore = require('electron').remote.app.errorStore;
 export default class ErrorModal extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { visible: !!ErrorStore.getError(), message: ErrorStore.getError() };
+    let value = ErrorStore.getError()
+    this.state = { visible: !!value, message: value };
   }
 
   render() {
@@ -27,7 +28,12 @@ export default class ErrorModal extends React.Component {
   }
 
   onChange() {
-    this.setState({ visible: !!ErrorStore.getError(), message: ErrorStore.getError() });
+    let value = ErrorStore.getError();
+    if (value) {
+      this.setState({ visible: true, message: value });
+    } else {
+      this.setState({ visible: false });
+    }
   }
 
   dismiss() {

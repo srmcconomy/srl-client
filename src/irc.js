@@ -32,8 +32,11 @@ client.on('error', err => console.log(err));
 
 client.dispatchToken = dispatcher.register(function(action) {
   switch(action.type) {
+   case 'send-message':
+    
+    break;
    case 'change-channel':
-   console.log(Object.keys(client.chans))
+    console.log(Object.keys(client.chans))
     if (!client.chans.hasOwnProperty(action.channel)) {
       client.join(action.channel, function() {
         dispatcher.dipatch({
@@ -42,6 +45,7 @@ client.dispatchToken = dispatcher.register(function(action) {
         })
       });
     }
+    break;
   }
 })
 
