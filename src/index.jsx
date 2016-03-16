@@ -19,7 +19,7 @@ app.on('ready', () => {
   app.errorStore = ErrorStore;
   app.dispatcher = Dispatcher;
   mainWindow = new BrowserWindow({width: 800, height: 600, frame: false});
-  mainWindow.loadUrl('file://' + __dirname + '/../index.html');
+  mainWindow.loadURL('file://' + __dirname + '/../index.html');
   mainWindow.on('closed', () => {
     mainWindow = null;
   })

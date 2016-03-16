@@ -14,8 +14,7 @@ gulp.task('babel', () => {
 
 gulp.task('sass', () => {
   return gulp.src('sass/**/*.scss')
-    .pipe(plumber())
-    .pipe(sass())
+    .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('css'));
 })
 

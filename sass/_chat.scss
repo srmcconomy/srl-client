@@ -108,3 +108,13 @@
   }
 
 }
+
+.chat-header {
+  -webkit-app-region: drag;
+  height: 40px;
+  .close-app {
+    margin-left: auto;
+    padding: 0 10px;
+    align-self: center;
+  }
+}
