@@ -8,22 +8,26 @@
 .channels-list-item.selected {
   background-color: #303030; }
 
+form {
+  margin: 0; }
+
 .chat {
   background-color: #303030; }
 
 .chat-mount {
   position: relative; }
 
-.chat-list {
+.chat-container {
   background-color: #303030;
   position: absolute;
+  overflow: hidden;
   left: 0;
   z-index: 1;
   width: 100%;
   height: 100%;
   transition: left 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.42), 0 3px 6px rgba(0, 0, 0, 0.56); }
-  .chat-list.hidden {
+  .chat-container.hidden {
     left: -100%;
     z-index: 0; }
 

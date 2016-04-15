@@ -16,8 +16,8 @@ export default class ChatList extends React.Component {
   render() {
     let chatListItems = this.state.messages.map((message, index) => <ChatListItem message={message} key={index}/>);
     return (
-      <div>
-        <div className={"chat-list scroller flex-spacer" + (!this.state.visible ? " hidden" : "")}>
+      <div className={`chat-container flex-vertical flex-spacer${!this.state.visible ? " hidden" : ""}`}>
+        <div className="chat-list scroller flex-spacer" >
           {chatListItems}
         </div>
         <ChatInput/>

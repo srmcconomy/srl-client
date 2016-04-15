@@ -1,5 +1,9 @@
 @import 'irc-colours';
 
+form {
+  margin: 0;
+}
+
 .chat {
   background-color: #303030;
 }
@@ -8,9 +12,10 @@
   position: relative;
 }
 
-.chat-list {
+.chat-container {
   background-color: #303030;
   position: absolute;
+  overflow: hidden;
   left: 0;
   z-index: 1;
   width: 100%;
