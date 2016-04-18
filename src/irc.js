@@ -4,6 +4,9 @@ import dispatcher from './dispatcher'
 const client = new irc.Client('irc.speedrunslive.com', 'prettybigjoe', { channels: ['#speedrunslive'] });
 
 client.on('message', (nick, to, text, message) => {
+  if (nick === 'NickServ' && text.match(/IDENTIFY/)) {
+    client.say(nick, `identify ${password}`)
+  }
   dispatcher.dispatch({
     type: 'recieve-pm',
     message: { sender: nick, channel: to, content: text, time: Date.now() }
@@ -20,7 +23,7 @@ client.on('notice', (nick, to, text, message) => {
 client.on('raw', message => {
   console.log(message);
   if (message.command === '477') {
-    console.log('!!!ERRROR')
+    console.log('!!!ERROR')
     dispatcher.dispatch({
       type: 'error',
       message: message.args[2]
@@ -33,7 +36,7 @@ client.on('error', err => console.log(err));
 client.dispatchToken = dispatcher.register(function(action) {
   switch(action.type) {
    case 'send-message':
-    
+    client.say(action.channel, action.message)
     break;
    case 'change-channel':
     console.log(Object.keys(client.chans))

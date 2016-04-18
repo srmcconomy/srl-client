@@ -20,7 +20,7 @@ export default class ChatList extends React.Component {
         <div className="chat-list scroller flex-spacer" >
           {chatListItems}
         </div>
-        <ChatInput/>
+        <ChatInput channel={this.props.channel}/>
       </div>
     )
   }

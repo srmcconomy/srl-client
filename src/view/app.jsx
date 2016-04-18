@@ -7,7 +7,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="app flex-vertical">
-        <div className="flex-vertical flex-spacer">
+        <div className="flex-vertical flex-spacer no-overflow">
           <section className="flex-horizontal flex-spacer">
             <ChannelsPane />
             <ChatPane />

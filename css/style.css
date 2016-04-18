@@ -25,14 +25,15 @@ form {
   z-index: 1;
   width: 100%;
   height: 100%;
-  transition: left 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.42), 0 3px 6px rgba(0, 0, 0, 0.56); }
+  transition: left 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
   .chat-container.hidden {
     left: -100%;
-    z-index: 0; }
+    z-index: 0;
+    transition: left 0.5s ease-in-out; }
 
 .chat-input {
-  z-index: 10; }
+  z-index: 10;
+  padding: 10px; }
   .chat-input textarea {
     resize: none;
     outline: none;
@@ -105,46 +106,64 @@ body {
   font-weight: 300;
   font-size: 112px;
   color: rgba(255, 255, 255, 0.54); }
+  .light-theme .display4 {
+    color: rgba(0, 0, 0, 0.54); }
 
 .display3 {
   font-weight: 400;
   font-size: 56px;
   color: rgba(255, 255, 255, 0.54); }
+  .light-theme .display3 {
+    color: rgba(0, 0, 0, 0.54); }
 
 .display2 {
   font-weight: 400;
   font-size: 45px;
   color: rgba(255, 255, 255, 0.54); }
+  .light-theme .display2 {
+    color: rgba(0, 0, 0, 0.54); }
 
 .display1 {
   font-weight: 400;
   font-size: 34px;
   color: rgba(255, 255, 255, 0.54); }
+  .light-theme .display1 {
+    color: rgba(0, 0, 0, 0.54); }
 
 .headline {
   font-weight: 400;
   font-size: 24px;
   color: rgba(255, 255, 255, 0.87); }
+  .light-theme .headline {
+    color: rgba(0, 0, 0, 0.54); }
 
 .title {
   font-weight: 500;
   font-size: 20px;
   color: rgba(255, 255, 255, 0.87); }
+  .light-theme .title {
+    color: rgba(0, 0, 0, 0.54); }
 
 .subheading {
   font-weight: 400;
   font-size: 15px;
   color: rgba(255, 255, 255, 0.87); }
+  .light-theme .subheading {
+    color: rgba(0, 0, 0, 0.54); }
 
 .body2 {
   font-weight: 500;
   font-size: 14px;
   color: rgba(255, 255, 255, 0.87); }
+  .light-theme .body2 {
+    color: rgba(0, 0, 0, 0.54); }
 
 .body1 {
   font-weight: 300;
   font-size: 14px;
   color: rgba(255, 255, 255, 0.87); }
+  .light-theme .body1 {
+    color: rgba(0, 0, 0, 0.54); }
   .body1 a {
     font-weight: 500; }
 
@@ -152,11 +171,15 @@ body {
   font-weight: 400;
   font-size: 12px;
   color: rgba(255, 255, 255, 0.54); }
+  .light-theme .caption {
+    color: rgba(0, 0, 0, 0.54); }
 
 .button {
   font-weight: 200;
   font-size: 14px;
   color: rgba(255, 255, 255, 0.87); }
+  .light-theme .button {
+    color: rgba(0, 0, 0, 0.54); }
 
 .modal-background {
   background-color: rgba(0, 0, 0, 0.42);
@@ -168,15 +191,12 @@ body {
   z-index: 1000;
   display: flex;
   align-items: center;
-  transition: opacity 0.3s; }
+  transition: opacity 0.1s ease-in-out;
+  opacity: 1; }
   .modal-background.hidden {
-    transition: opacity 0.3s, z-index 0.3s step-end;
+    opacity: 0;
     z-index: -1;
-    opacity: 0; }
-    .modal-background.hidden .modal {
-      transition: transform 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045);
-      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      transform: scale3d(0.8, 0.8, 0.8); }
+    transition: z-index 0.1s step-end, opacity 0.1s ease-in-out; }
 
 .modal {
   background-color: #424242;
@@ -185,6 +205,17 @@ body {
   padding: 24px;
   transform: scale3d(1, 1, 1);
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+  .hidden .modal {
+    transition: transform 0.1s ease-in;
+    transform: scale3d(0.8, 0.8, 0.8); }
+
+textarea {
+  background: inherit;
+  resize: none;
+  color: inherit;
+  font: inherit;
+  border: inherit;
+  outline: inherit; }
 
 a {
   color: inherit;
@@ -192,6 +223,9 @@ a {
   transition: all 0.2s ease-in-out; }
   a:hover {
     text-shadow: 0 3px 6px rgba(0, 0, 0, 0.42), 0 3px 6px rgba(0, 0, 0, 0.56); }
+
+.no-overflow {
+  overflow: hidden; }
 
 .flex-vertical {
   display: flex;

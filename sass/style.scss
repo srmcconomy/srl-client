@@ -2,38 +2,15 @@
 @import 'chat';
 @import 'irc-colours';
 @import 'typography';
+@import 'modal';
 
-.modal-background {
-  background-color: rgba(0,0,0,0.42);
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  transition: opacity 0.3s;
-
-  &.hidden {
-    transition: opacity 0.3s, z-index 0.3s step-end;
-    z-index: -1;
-    opacity: 0;
-    .modal {
-      transition: transform 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045);
-      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      transform: scale3d(0.8,0.8,0.8);
-    }
-  }
-}
-
-.modal {
-  background-color: #424242;
-  box-shadow: 0 19px 38px rgba(0,0,0,0.42), 0 15px 12px rgba(0,0,0,0.56);
-  margin: 0 auto;
-  padding: 24px;
-  transform: scale3d(1,1,1);
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+textarea {
+  background: inherit;
+  resize: none;
+  color: inherit;
+  font: inherit;
+  border: inherit;
+  outline: inherit;
 }
 
 a {
@@ -43,6 +20,10 @@ a {
   &:hover {
     text-shadow: 0 3px 6px rgba(0,0,0,0.42), 0 3px 6px rgba(0,0,0,0.56);
   }
+}
+
+.no-overflow {
+  overflow: hidden;
 }
 
 .flex-vertical {
