@@ -1,11 +1,13 @@
 import irc from 'irc'
 import dispatcher from './dispatcher'
+import UserStore from './stores/user-store'
 
-const client = new irc.Client('irc.speedrunslive.com', 'prettybigjoe', { channels: ['#speedrunslive'] });
+const client = new irc.Client('irc.speedrunslive.com',
+  UserStore.getUsername(), { channels: ['#speedrunslive'] });
 
 client.on('message', (nick, to, text, message) => {
   if (nick === 'NickServ' && text.match(/IDENTIFY/)) {
-    client.say(nick, `identify ${password}`)
+    client.say(nick, `identify ${UserStore.getPassword()}`)
   }
   dispatcher.dispatch({
     type: 'recieve-pm',
