@@ -1,5 +1,5 @@
-export const WebsiteRegex = /\shttp:\/\/[^\s]+/g;
-export const ChannelRegex = /\s#[^\s,]+/g
+export const WebsiteRegex = /(^|\s)https?:\/\/[^\s]+/g;
+export const ChannelRegex = /(^|\s)#[^\s,]+/g
 
 Array.prototype.minIndex = function(lambda) {
   if (typeof lambda === 'undefined') {

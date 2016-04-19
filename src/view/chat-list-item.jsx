@@ -2,7 +2,7 @@ import React from 'react'
 import dateformat from '../dateformat'
 import dispatcher from '../dispatcher'
 import ChannelLink from './channel-link'
-import { ColorCodes, ColorCodeRegex } from '../color-util'
+import { ColorCodes, ColorCodeRegex, FormatCodes, FormatRegex } from '../color-util'
 import { WebsiteRegex, ChannelRegex } from '../util'
 
 class MultiRegex {
@@ -31,6 +31,7 @@ class MultiRegex {
 
 function parseMessage(message) {
   let elem = <span className="message-content body1"></span>
+  let spanStack = [];
   var outerSpans = [];
   let innerSpans = [];
   var lastIndex = 0;
@@ -39,6 +40,27 @@ function parseMessage(message) {
     [
       {
         regex: ColorCodeRegex,
+        func: function(match) {
+          spanStack.unshift
+          innerSpans.push(message.substring(lastIndex, match.index));
+          if (currentColour) {
+            outerSpans.push(<span className={currentColour}>{innerSpans}</span>);
+          } else {
+            outerSpans.push(...innerSpans)
+          }
+          if (typeof match[2] !== 'undefined' && typeof match[1] !== 'undefined') {
+            currentColour = [`${ColorCodes[parseInt(match[1])]}-fore`, `${ColorCodes[parseInt(match[2])]}-back`];
+          } else if (typeof match[1] !== 'undefined') {
+            currentColour = `${ColorCodes[parseInt(match[1])]}-fore`;
+          } else {
+            currentColour = null;
+          }
+          lastIndex = match.index + match[0].length;
+          innerSpans = [];
+        }
+      },
+      {
+        regex: FormatRegex,
         func: function(match) {
           innerSpans.push(message.substring(lastIndex, match.index));
           if (currentColour) {
@@ -60,8 +82,13 @@ function parseMessage(message) {
       {
         regex: WebsiteRegex,
         func: function(match) {
-          innerSpans.push(message.substring(lastIndex, match.index + 1));
-          let m = match[0].substring(1);
+          let m = match[0];
+          let index = match.index;
+          if (match[0].match(/\s/)) {
+            m = m.substring(1);
+            index++;
+          }
+          innerSpans.push(message.substring(lastIndex, index));
           innerSpans.push(<a href={m} target="_blank">{m}</a>);
           lastIndex = match.index + match[0].length;
         }

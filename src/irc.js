@@ -55,7 +55,7 @@ class IRC {
         client.say(action.channel, action.message)
         break;
        case 'change-channel':
-        console.log(Object.keys(client.chans))
+        console.log(client.chans)
         if (!client.chans.hasOwnProperty(action.channel)) {
           client.join(action.channel, function() {
             dispatcher.dispatch({
