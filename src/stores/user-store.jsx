@@ -7,7 +7,7 @@ var password = null
 const UserStore = Object.assign({}, EventEmitter.prototype, {
   getUsername: function() {
     return username;
-  }
+  },
   getPassword: function() {
     return password;
   }

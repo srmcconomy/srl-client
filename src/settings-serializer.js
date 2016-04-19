@@ -1,5 +1,6 @@
 import fs from 'fs'
 import UserStore from './stores/user-store'
+import Dispatcher from './dispatcher'
 
 class SettingsSerializer {
   save() {
@@ -10,7 +11,8 @@ class SettingsSerializer {
     fs.readFile(file, (err, data) => {
       if (err) console.log(err);
       let settings = JSON.parse(data);
-      dispatcher.dispatch('set-username', )
+      Dispatcher.dispatch({type: 'set-username', username: settings.username});
+      Dispatcher.dispatch({type: 'set-password', password: settings.password});
     })
   }
 }

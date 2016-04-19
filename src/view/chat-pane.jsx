@@ -1,5 +1,5 @@
 import React from 'react'
-import ChatList from './chat-list'
+import ChatContainer from './chat-container'
 import ChatInput from './chat-input'
 import ChatHeader from './chat-header'
 var MessagesStore = require('electron').remote.app.messagesStore;
@@ -11,12 +11,12 @@ export default class ChatPane extends React.Component {
   }
 
   render() {
-    let chatLists = this.state.channels.map(channel => <ChatList channel={channel.name}/>)
+    let chatContainers = this.state.channels.map(channel => <ChatContainer channel={channel.name}/>)
     return (
       <div className="chat flex-spacer flex-vertical">
         <ChatHeader />
         <div className="chat-mount flex-spacer flex-vertical">
-          {chatLists}
+          {chatContainers}
         </div>
       </div>
     );

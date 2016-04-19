@@ -9,18 +9,14 @@ export default class ChatList extends React.Component {
     super(props);
     this.state = {
       messages: MessagesStore.getMessagesForChannel(this.props.channel),
-      visible: MessagesStore.getCurrentChannel().name === this.props.channel
     }
   }
 
   render() {
     let chatListItems = this.state.messages.map((message, index) => <ChatListItem message={message} key={index}/>);
     return (
-      <div className={`chat-container flex-vertical flex-spacer${!this.state.visible ? " hidden" : ""}`}>
-        <div className="chat-list scroller flex-spacer" >
-          {chatListItems}
-        </div>
-        <ChatInput channel={this.props.channel}/>
+      <div className="chat-list scroller flex-spacer" >
+        {chatListItems}
       </div>
     )
   }
@@ -47,8 +43,7 @@ export default class ChatList extends React.Component {
 
   onChange() {
     this.setState({
-      messages: MessagesStore.getMessagesForChannel(this.props.channel),
-      visible: MessagesStore.getCurrentChannel().name === this.props.channel
+      messages: MessagesStore.getMessagesForChannel(this.props.channel)
     });
   }
 }
