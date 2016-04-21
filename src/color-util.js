@@ -30,4 +30,4 @@ export const FormatCodes = {
 }
 
 export const ColorCodeRegex = new RegExp(`${ColorChar}(?:(\\d\\d?)(?:,(\\d\\d?))?)?`, 'g');
-export const FormatRegex = new RegExp(`[${BoldChar+ItalicsChar+UnderlineChar}]`)
+export const FormatRegex = new RegExp(`[${BoldChar+ItalicsChar+UnderlineChar+PlainChar}]`, 'g')

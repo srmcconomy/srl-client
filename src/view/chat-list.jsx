@@ -1,8 +1,8 @@
 import ChatListItem from './chat-list-item'
-import ChatInput from './chat-input'
 import React from 'react'
 import ReactDOM from 'react-dom'
 var MessagesStore = require('electron').remote.app.messagesStore;
+var ipcRenderer = require('electron').ipcRenderer;
 
 export default class ChatList extends React.Component {
   constructor(props) {
@@ -35,11 +35,11 @@ export default class ChatList extends React.Component {
   }
 
   componentDidMount() {
-    MessagesStore.on('change', this.onChange.bind(this));
+    ipcRenderer.on('MessagesStore#change', this.onChange.bind(this));
   }
 
   componentWillUnmount() {
-    MessagesStore.removeListener('change', this.onChange.bind(this));
+    ipcRenderer.removeListener('MessagesStore#change', this.onChange.bind(this));
   }
 
   onChange() {

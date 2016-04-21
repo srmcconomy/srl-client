@@ -2,7 +2,7 @@ import React from 'react'
 import dateformat from '../dateformat'
 import dispatcher from '../dispatcher'
 import ChannelLink from './channel-link'
-import { ColorCodes, ColorCodeRegex, FormatCodes, FormatRegex } from '../color-util'
+import { ColorCodes, ColorCodeRegex, FormatCodes, FormatRegex, PlainChar } from '../color-util'
 import { WebsiteRegex, ChannelRegex } from '../util'
 
 class MultiRegex {
@@ -31,52 +31,66 @@ class MultiRegex {
 
 function parseMessage(message) {
   let elem = <span className="message-content body1"></span>
-  let spanStack = [];
   var outerSpans = [];
   let innerSpans = [];
   var lastIndex = 0;
   var currentColour = null;
+  let currentFormatting = {};
+  for (let format in FormatCodes) {
+    currentFormatting[format] = false;
+  }
   let multiRegex = new MultiRegex(
     [
       {
         regex: ColorCodeRegex,
         func: function(match) {
-          spanStack.unshift
-          innerSpans.push(message.substring(lastIndex, match.index));
-          if (currentColour) {
-            outerSpans.push(<span className={currentColour}>{innerSpans}</span>);
-          } else {
-            outerSpans.push(...innerSpans)
+          if (lastIndex !== match.index) {
+            innerSpans.push(message.substring(lastIndex, match.index));
+            let classes = [currentColour];
+            for (let format in currentFormatting) {
+              if (currentFormatting[format]) classes.push(format);
+            }
+            if (classes.length > 0) {
+              outerSpans.push(<span className={classes.join(' ')}>{innerSpans}</span>);
+            } else {
+              outerSpans.push(...innerSpans)
+            }
+            innerSpans = [];
           }
           if (typeof match[2] !== 'undefined' && typeof match[1] !== 'undefined') {
-            currentColour = [`${ColorCodes[parseInt(match[1])]}-fore`, `${ColorCodes[parseInt(match[2])]}-back`];
+            currentColour = `${ColorCodes[parseInt(match[1])]}-fore ${ColorCodes[parseInt(match[2])]}-back`;
           } else if (typeof match[1] !== 'undefined') {
             currentColour = `${ColorCodes[parseInt(match[1])]}-fore`;
           } else {
             currentColour = null;
           }
           lastIndex = match.index + match[0].length;
-          innerSpans = [];
         }
       },
       {
         regex: FormatRegex,
         func: function(match) {
-          innerSpans.push(message.substring(lastIndex, match.index));
-          if (currentColour) {
-            outerSpans.push(<span className={currentColour}>{innerSpans}</span>);
-          } else {
-            outerSpans.push(...innerSpans)
+          if (lastIndex !== match.index) {
+            innerSpans.push(message.substring(lastIndex, match.index));
+            let classes = [currentColour];
+            for (let format in currentFormatting) {
+              if (currentFormatting[format]) classes.push(format);
+            }
+            if (classes.length > 0) {
+              outerSpans.push(<span className={classes.join(' ')}>{innerSpans}</span>);
+            } else {
+              outerSpans.push(...innerSpans)
+            }
+            innerSpans = [];
           }
-          if (typeof match[2] !== 'undefined' && typeof match[1] !== 'undefined') {
-            currentColour = [`${ColorCodes[parseInt(match[1])]}-fore`, `${ColorCodes[parseInt(match[2])]}-back`];
-          } else if (typeof match[1] !== 'undefined') {
-            currentColour = `${ColorCodes[parseInt(match[1])]}-fore`;
+          if (match[0] === PlainChar) {
+            for (let format in currentFormatting) {
+              currentFormatting[format] = false;
+            }
           } else {
-            currentColour = null;
+            currentFormatting[FormatCodes[match[0]]] = !currentFormatting[FormatCodes[match[0]]];
           }
           lastIndex = match.index + match[0].length;
-          innerSpans = [];
         }
       },
       {
@@ -104,10 +118,11 @@ function parseMessage(message) {
       }
     ], message);
   multiRegex.exec();
+  let classes = [currentColour, ...currentFormatting];
   if (lastIndex < message.length)
     innerSpans.push(message.substring(lastIndex));
-  if (currentColour) {
-    outerSpans.push(<span className={currentColour}>{innerSpans}</span>);
+  if (classes.length > 0) {
+    outerSpans.push(<span className={classes.join(' ')}>{innerSpans}</span>);
   } else {
     outerSpans.push(...innerSpans)
   }

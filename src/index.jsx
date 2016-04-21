@@ -16,17 +16,24 @@ app.on('window-all-closed', () => {
 });
 
 app.on('ready', () => {
+  app.errorStore = new ErrorStore(Dispatcher);
+  app.messagesStore = new MessagesStore(Dispatcher);
+  app.userStore = new UserStore(Dispatcher);
+  app.dispatcher = Dispatcher;
   Dispatcher.dispatch({type: 'set-username', username: 'prettybigjoe'})
   Dispatcher.dispatch({type: 'set-password', password: 'kerlogin'})
-  app.messagesStore = MessagesStore;
-  app.errorStore = ErrorStore;
-  app.userStore = UserStore;
-  app.dispatcher = Dispatcher;
   irc.initialize();
   mainWindow = new BrowserWindow({width: 800, height: 600, frame: false});
+  mainWindow.openDevTools()
   mainWindow.loadURL('file://' + __dirname + '/../index.html');
   mainWindow.on('closed', () => {
     mainWindow = null;
+  })
+  mainWindow.webContents.on('did-finish-load', function() {
+    app.errorStore.setWebContents(mainWindow.webContents);
+    app.userStore.setWebContents(mainWindow.webContents);
+    app.messagesStore.setWebContents(mainWindow.webContents);
+    mainWindow.webContents.toggleDevTools();
   })
   mainWindow.webContents.on('new-window', function(e, url) {
     e.preventDefault();

@@ -1,5 +1,6 @@
 import React from 'react'
 import ChannelsListItem from './channels-list-item'
+var ipcRenderer = require('electron').ipcRenderer;
 var MessagesStore = require('electron').remote.app.messagesStore;
 
 export default class ChannelsList extends React.Component {
@@ -21,11 +22,11 @@ export default class ChannelsList extends React.Component {
   }
 
   componentDidMount() {
-    MessagesStore.on('change', this.onChange.bind(this));
+    ipcRenderer.on('MessagesStore#change', this.onChange.bind(this));
   }
 
   componentWillUnmount() {
-    MessagesStore.removeListener('change', this.onChange.bind(this));
+    ipcRenderer.removeListener('MessagesStore#change', this.onChange.bind(this));
   }
 
   onChange() {

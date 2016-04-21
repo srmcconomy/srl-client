@@ -1,6 +1,7 @@
 import irc from 'irc'
 import dispatcher from './dispatcher'
 import UserStore from './stores/user-store'
+import app from 'app'
 
 var client = null;
 
@@ -11,7 +12,7 @@ class IRC {
 
   initialize() {
     client = new irc.Client('irc.speedrunslive.com',
-      UserStore.getUsername(), { channels: ['#speedrunslive'] });
+      app.userStore.getUsername(), { channels: ['#speedrunslive'] });
 
     client.on('message', (nick, to, text, message) => {
 
@@ -24,7 +25,7 @@ class IRC {
     client.on('notice', (nick, to, text, message) => {
       if (nick === 'NickServ' && text.match(/IDENTIFY/)) {
         console.log(text)
-        client.say(nick, `identify ${UserStore.getPassword()}`)
+        client.say(nick, `identify ${app.userStore.getPassword()}`)
       }
       dispatcher.dispatch({
         type: 'recieve-notice',
@@ -37,7 +38,7 @@ class IRC {
     })
 
     client.on('raw', message => {
-      //console.log(message);
+      // console.log(message);
       if (message.command === '477') {
         console.log('!!!ERROR')
         dispatcher.dispatch({

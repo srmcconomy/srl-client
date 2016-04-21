@@ -1,26 +1,27 @@
-import EventEmitter from 'events'
-import Dispatcher from '../dispatcher'
+import Store from './store'
 
 var error = null;
 
-const ErrorStore = Object.assign({}, EventEmitter.prototype, {
-  getError: function() {
-    return error;
+export default class ErrorStore extends Store {
+  constructor(dispatcher) {
+    super(dispatcher);
+    this.error = null;
   }
-});
 
-ErrorStore.dispatchToken = Dispatcher.register(function(action) {
-  console.log(action)
-  switch(action.type) {
-   case 'error':
-    error = action.message;
-    ErrorStore.emit('change');
-    break;
-   case 'dismiss-error':
-    error = null;
-    ErrorStore.emit('change');
-    break;
+  onDispatch(action) {
+    switch(action.type) {
+     case 'error':
+      this.error = action.message;
+      this.send('change')
+      break;
+     case 'dismiss-error':
+      this.error = null;
+      this.send('change')
+      break;
+    }
   }
-});
 
-export default ErrorStore;
+  getError() {
+    return this.error;
+  }
+}

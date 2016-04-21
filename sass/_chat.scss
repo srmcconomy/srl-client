@@ -112,6 +112,15 @@ form {
   .black-fore {
     color: $black;
   }
+  .bold {
+    font-weight: 500;
+  }
+  .underline {
+    text-decoration: underline;
+  }
+  .italics {
+    font-style: italic;
+  }
 
 }
 

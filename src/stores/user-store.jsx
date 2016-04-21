@@ -1,29 +1,30 @@
-import EventEmitter from 'events'
-import Dispatcher from '../dispatcher'
+import Store from './store'
 
-var username = null
-var password = null
-
-const UserStore = Object.assign({}, EventEmitter.prototype, {
-  getUsername: function() {
-    return username;
-  },
-  getPassword: function() {
-    return password;
+export default class UserStore extends Store {
+  constructor(dispatcher) {
+    super(dispatcher);
+    this.username = null;
+    this.password = null;
   }
-});
 
-UserStore.dispatchToken = Dispatcher.register(function(action) {
-  switch(action.type) {
-   case 'set-username':
-    username = action.username;
-    UserStore.emit('change');
-    break;
-   case 'set-password':
-    password = action.password;
-    UserStore.emit('change');
-    break;
+  getUsername() {
+    return this.username;
   }
-});
 
-export default UserStore;
+  getPassword() {
+    return this.password;
+  }
+
+  onDispatch(action) {
+    switch(action.type) {
+     case 'set-username':
+      this.username = action.username;
+      this.send('change');
+      break;
+     case 'set-password':
+      this.password = action.password;
+      this.send('change');
+      break;
+    }
+  }
+}

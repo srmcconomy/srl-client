@@ -1,6 +1,5 @@
 import React from 'react'
 var dispatcher = require('electron').remote.app.dispatcher;
-var MessagesStore = require('electron').remote.app.messagesStore;
 
 export default class ChatInput extends React.Component {
   constructor(props) {

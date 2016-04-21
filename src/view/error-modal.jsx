@@ -1,5 +1,6 @@
 import React from 'react'
 var dispatcher = require('electron').remote.app.dispatcher;
+var ipcRenderer = require('electron').ipcRenderer;
 var ErrorStore = require('electron').remote.app.errorStore;
 
 export default class ErrorModal extends React.Component {
@@ -20,11 +21,11 @@ export default class ErrorModal extends React.Component {
   }
 
   componentDidMount() {
-    ErrorStore.on('change', this.onChange.bind(this));
+    ipcRenderer.on('ErrorStore#change', this.onChange.bind(this));
   }
 
   componentWillUnmount() {
-    ErrorStore.removeListener('change', this.onChange.bind(this));
+    ipcRenderer.removeListener('MessagesStore#change', this.onChange.bind(this));
   }
 
   onChange() {

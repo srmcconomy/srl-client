@@ -1,74 +1,82 @@
-import EventEmitter from 'events'
-import Dispatcher from '../dispatcher'
+import Store from './store'
 
-const channels = {};
+export default class MessagesStore extends Store {
+  constructor(dispatcher) {
+    super(dispatcher);
+    this.channels = {};
+    this.currentChannel = '#speedrunslive';
+    this.channels[this.currentChannel] = {
+      name: this.currentChannel,
+      time: 0,
+      messages: [],
+      currentText: ''
+    }
+  }
 
-function addMessage(message) {
-  if (!channels.hasOwnProperty(message.channel))
-    channels[message.channel] = { name: message.channel, time: message.date, messages: [], currentText: '' }
-  channels[message.channel].messages.push(message);
-}
+  //private
+  addMessage(message) {
+    if (!this.channels.hasOwnProperty(message.channel))
+      this.channels[message.channel] = { name: message.channel, time: message.date, messages: [], currentText: '' }
+    this.channels[message.channel].messages.push(message);
+  }
 
-function addNotice(message) {
-  channels[currentChannel].messages.push(message);
-}
+  addNotice(message) {
+    this.channels[this.currentChannel].messages.push(message);
+  }
 
-var currentChannel = '#speedrunslive';
-channels[currentChannel] = {
-  name: currentChannel,
-  time: Date.now(),
-  messages: [],
-  currentText: ''
-}
+  //protected
+  onDispatch(action) {
+    switch(action.type) {
+     case 'channel-joined':
+      this.currentChannel = action.channel;
+      if (!this.channels.hasOwnProperty(this.currentChannel))
+        this.channels[this.currentChannel] = { name: this.currentChannel, time: 0, messages: [] }
+      this.send('change');
+     case 'change-channel':
+      if (this.channels.hasOwnProperty(action.channel)) {
+        this.currentChannel = action.channel;
+        this.send('change');
+      }
+      break;
+     case 'recieve-pm':
+      this.addMessage(action.message);
+      this.send('change');
+      break;
+     case 'recieve-notice':
+      this.addNotice(action.message);
+      this.send('change');
+      break;
+    }
+  }
 
-const MessagesStore = Object.assign({}, EventEmitter.prototype, {
-  getMessagesForChannel: function(channel) {
-    return channels[channel].messages;
-  },
-  getChannel: function(channel) {
-    return channels[channel];
-  },
-  getLatestTime: function(channel) {
-    if (channels[channel].messages.length == 0) return 0;
-    return channels[channel].messages[channels[channel].messages.length - 1].time;
-  },
-  getCurrentChannelMessages: function() {
-    return channels[currentChannel].messages;
-  },
-  getCurrentChannel: function() {
-    return channels[currentChannel];
-  },
-  getChannels: function() {
+  //public
+  getMessagesForChannel(channel) {
+    return this.channels[channel].messages;
+  }
+
+  getChannel(channel) {
+    return this.channels[channel];
+  }
+
+  getLatestTime(channel) {
+    if (this.channels[channel].messages.length == 0) return 0;
+    return this.channels[channel].messages[this.channels[channel].messages.length - 1].time;
+  }
+
+  getCurrentChannelMessages() {
+    return this.channels[this.currentChannel].messages;
+  }
+
+  getCurrentChannel() {
+    return this.channels[this.currentChannel];
+  }
+
+  getChannels() {
+    console.log(this.channels)
     let chans = [];
-    for (let name in channels) {
+    for (let name in this.channels) {
       chans.push({ name: name, time: this.getLatestTime(name) })
     }
     return chans;
   }
-});
-
-MessagesStore.dispatchToken = Dispatcher.register(function(action) {
-  switch(action.type) {
-   case 'channel-joined':
-    currentChannel = action.channel;
-    if (!channels.hasOwnProperty(currentChannel))
-      channels[currentChannel] = { name: currentChannel, time: 0, messages: [] }
-    MessagesStore.emit('change');
-   case 'change-channel':
-    if (channels.hasOwnProperty(action.channel)) {
-      currentChannel = action.channel;
-      MessagesStore.emit('change');
-    }
-    break;
-   case 'recieve-pm':
-    addMessage(action.message);
-    MessagesStore.emit('change');
-    break;
-   case 'recieve-notice':
-    addNotice(action.message);
-    MessagesStore.emit('change');
-    break;
-  }
-});
-
-export default MessagesStore;
+}

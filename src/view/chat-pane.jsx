@@ -3,6 +3,7 @@ import ChatContainer from './chat-container'
 import ChatInput from './chat-input'
 import ChatHeader from './chat-header'
 var MessagesStore = require('electron').remote.app.messagesStore;
+var ipcRenderer = require('electron').ipcRenderer;
 
 export default class ChatPane extends React.Component {
   constructor(props) {
@@ -11,7 +12,7 @@ export default class ChatPane extends React.Component {
   }
 
   render() {
-    let chatContainers = this.state.channels.map(channel => <ChatContainer channel={channel.name}/>)
+    let chatContainers = this.state.channels.map(channel => <ChatContainer channel={channel.name} key={channel.name}/>)
     return (
       <div className="chat flex-spacer flex-vertical">
         <ChatHeader />
@@ -23,11 +24,11 @@ export default class ChatPane extends React.Component {
   }
 
   componentDidMount() {
-    MessagesStore.on('change', this.onChange.bind(this));
+    ipcRenderer.on('MessagesStore#change', this.onChange.bind(this));
   }
 
   componentWillUnmount() {
-    MessagesStore.removeListener('change', this.onChange.bind(this));
+    ipcRenderer.removeListener('MessagesStore#change', this.onChange.bind(this));
   }
 
   onChange() {

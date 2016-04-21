@@ -1,6 +1,7 @@
 import React from 'react'
 import dateformat from '../dateformat'
 var dispatcher = require('electron').remote.app.dispatcher;
+var ipcRenderer = require('electron').ipcRenderer;
 var MessagesStore = require('electron').remote.app.messagesStore;
 
 export default class ChannelsListItem extends React.Component {
@@ -27,11 +28,11 @@ export default class ChannelsListItem extends React.Component {
   }
 
   componentDidMount() {
-    MessagesStore.on('change', this.onChange.bind(this));
+    ipcRenderer.on('MessagesStore#change', this.onChange.bind(this));
   }
 
   componentWillUnmount() {
-    MessagesStore.removeListener('change', this.onChange.bind(this));
+    ipcRenderer.removeListener('MessagesStore#change', this.onChange.bind(this));
   }
 
   onChange() {

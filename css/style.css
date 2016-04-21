@@ -90,6 +90,12 @@ form {
     color: rgba(255, 255, 255, 0.87); }
   .chat-list-item .black-fore {
     color: rgba(0, 0, 0, 0.87); }
+  .chat-list-item .bold {
+    font-weight: 500; }
+  .chat-list-item .underline {
+    text-decoration: underline; }
+  .chat-list-item .italics {
+    font-style: italic; }
 
 .chat-header {
   -webkit-app-region: drag;
