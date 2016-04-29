@@ -11,7 +11,12 @@ export default class ChatList extends React.Component {
   }
 
   render() {
-    let userListItems = this.state.users.map((user, index) => <UserListItem user={user} key={index}/>);
+    let userListItems [];
+
+    for (var user in this.state.users) {
+
+    }
+    = this.state.users.map((user, index) => <UserListItem user={user} key={index}/>);
     return (
       <div className="user-list scroller flex-spacer" >
         {userListItems}

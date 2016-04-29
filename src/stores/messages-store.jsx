@@ -1,16 +1,21 @@
 import Store from './store'
 
+class Channel {
+  constructor(name) {
+    this.name = name;
+    this.time = 0;
+    this.messages = [];
+    this.users = {};
+    this.currentText = '';
+  }
+}
+
 export default class MessagesStore extends Store {
   constructor(dispatcher) {
     super(dispatcher);
     this.channels = {};
     this.currentChannel = '#speedrunslive';
-    this.channels[this.currentChannel] = {
-      name: this.currentChannel,
-      time: 0,
-      messages: [],
-      currentText: ''
-    }
+    this.channels[this.currentChannel] = new Channel(this.currentChannel)
   }
 
   //private
@@ -24,13 +29,33 @@ export default class MessagesStore extends Store {
     this.channels[this.currentChannel].messages.push(message);
   }
 
+  addUsers(channel, users) {
+    for (var user in users) {
+      this.channels[channel].users[user] = users[user];
+    }
+  }
+
+  setUserMode(channel, users) {
+    for (var user in users) {
+      if (this.channels[channel].users.hasOwnProperty(user)) {
+        this.channels[channel].users[user] = users[user];
+      }
+    }
+  }
+
+  removeUsers(channel, users) {
+    for (var user in users) {
+      if (this.channels[channel].users.hasOwnProperty(user)) delete this.channels[channel].users[user]
+    }
+  }
+
   //protected
   onDispatch(action) {
     switch(action.type) {
      case 'channel-joined':
       this.currentChannel = action.channel;
       if (!this.channels.hasOwnProperty(this.currentChannel))
-        this.channels[this.currentChannel] = { name: this.currentChannel, time: 0, messages: [] }
+        this.channels[this.currentChannel] = new Channel(this.currentChannel)
       this.send('change');
      case 'change-channel':
       if (this.channels.hasOwnProperty(action.channel)) {
@@ -46,6 +71,12 @@ export default class MessagesStore extends Store {
       this.addNotice(action.message);
       this.send('change');
       break;
+     case 'users-join':
+      this.addUsers(action.channel, action.users);
+      this.send('change');
+     case 'users-leave':
+      this.removeUsers(action.channel, action.users);
+      this.send('change');
     }
   }
 
@@ -71,8 +102,11 @@ export default class MessagesStore extends Store {
     return this.channels[this.currentChannel];
   }
 
+  getUsersForChannel(channel) {
+    return this.channels[channel].users;
+  }
+
   getChannels() {
-    console.log(this.channels)
     let chans = [];
     for (let name in this.channels) {
       chans.push({ name: name, time: this.getLatestTime(name) })
